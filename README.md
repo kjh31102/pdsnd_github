@@ -3,7 +3,7 @@
 ### Date created
 Jan 5th, 2022
 
-### Project Title
+# Project Title
 Explore US Bikeshare Data
 
 ### Description
