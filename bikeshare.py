@@ -24,7 +24,7 @@ def get_filters():
             break
         else:
             print("\nPlease choose among 'Chicago' or 'New York' or 'Washington'")
-    
+
 
     # get user input for month (all, january, february, ... , june)
     while True:
@@ -42,7 +42,7 @@ def get_filters():
         if day in week_days:
             break
         else:
-            print("\nPlease choose among Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All")        
+            print("\nPlease choose among Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All")
 
     print('-'*40)
     return city, month, day
@@ -53,7 +53,7 @@ def load_data(city, month, day):
     df = pd.read_csv(CITY_DATA[city])
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    # extract month and day of week from Start Time to create new columns    
+    # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.strftime("%A")
     df['hour'] = df['Start Time'].dt.hour
@@ -67,8 +67,8 @@ def load_data(city, month, day):
 
      # filter by day of week if applicable
     if day != 'all':
-        # filter by day of week to create the new dataframe        
-        df = df[df['day_of_week'] == day.title()]           
+        # filter by day of week to create the new dataframe
+        df = df[df['day_of_week'] == day.title()]
 
     return df
 
@@ -88,7 +88,7 @@ def time_stats(df, month, day):
     # display the most common day of week
 
     common_day = df['day_of_week'].mode()[0]
-    if day == 'all':    
+    if day == 'all':
         print('Most Common Day:', common_day)
     # display the most common start hour
     common_hour = df['hour'].mode()[0]
@@ -108,13 +108,13 @@ def station_stats(df):
     common_start_station = df['Start Station'].mode()[0]
     common_start_station_count = df[df['Start Station'] == common_start_station].shape[0]
     print('Most Commonly-used Start Station :', common_start_station)
-    print('Count of Most Commonly-used Start Station :', common_start_station_count)     
+    print('Count of Most Commonly-used Start Station :', common_start_station_count)
     print()
 
     # display most commonly used end station
     common_end_station = df['End Station'].mode()[0]
-    common_end_station_count = df[df['End Station'] == common_end_station].shape[0]    
-    print('Most Commonly-used End Station:', common_end_station)    
+    common_end_station_count = df[df['End Station'] == common_end_station].shape[0]
+    print('Most Commonly-used End Station:', common_end_station)
     print('Count of Most Commonly-used End Station :', common_end_station_count)
     print()
 
@@ -123,7 +123,7 @@ def station_stats(df):
     common_start_end_station = df['comb_of_start_end_stn'].mode()[0]
     common_start_end_station_count = df[df['comb_of_start_end_stn'] == common_start_end_station].shape[0]
     print('Most Commonly-used Combination of Start/End Station:\n', common_start_end_station)
-    print('Count of Most Commonly-used Combination of Start/End Station:', common_start_end_station_count)    
+    print('Count of Most Commonly-used Combination of Start/End Station:', common_start_end_station_count)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -141,7 +141,7 @@ def trip_duration_stats(df):
 
     # display mean travel time
     mean_travel_time = int(df['Trip Duration'].mean())
-    print('Mean Travel Time (seconds):', mean_travel_time)    
+    print('Mean Travel Time (seconds):', mean_travel_time)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -155,7 +155,7 @@ def user_stats(df, city):
 
     # Display counts of user types
     counts_of_user_types = df.groupby(['User Type'])['User Type'].count()
-    print('Counts of each user types:\n', counts_of_user_types, '\n')    
+    print('Counts of each user types:\n', counts_of_user_types, '\n')
 
     # Display counts of gender
     if city != "washington":
@@ -199,7 +199,7 @@ def main():
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
+        print("Thank you for visiting us")
 
 if __name__ == "__main__":
 	main()
